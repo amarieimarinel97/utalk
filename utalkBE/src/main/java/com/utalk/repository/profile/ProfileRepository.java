@@ -24,8 +24,8 @@ public class ProfileRepository implements CrudRepository<Profile> {
         checkNullParameters(connection);
         checkNullFields(profile);
         final String insertSql = "INSERT INTO " +
-                "PROFILES(PHOTO, OCCUPATION, BIRTHDATE, LOCATION) " +
-                "VALUES(?, ?, ?, ?)";
+                "PROFILES(NAME, PHOTO, OCCUPATION, BIRTHDATE, LOCATION) " +
+                "VALUES(?, ?, ?, ?, ?)";
 
         try (PreparedStatement statement = connection.prepareStatement(insertSql, new String[]{"ID"})) {
             repositoryUtils.prepareElementStatementUpdate(connection, statement, profile);
@@ -78,7 +78,7 @@ public class ProfileRepository implements CrudRepository<Profile> {
     public boolean update(Connection connection, Profile profile) {
         checkNullFields(profile);
         checkNullParameters(connection, profile.getId());
-        final String updateSql = "UPDATE PROFILES SET PHOTO = ?, OCCUPATION = ?, BIRTHDATE = ?, LOCATION = ? WHERE ID = ?";
+        final String updateSql = "UPDATE PROFILES SET NAME = ?, PHOTO = ?, OCCUPATION = ?, BIRTHDATE = ?, LOCATION = ? WHERE ID = ?";
 
 
         try (PreparedStatement statement = connection.prepareStatement(updateSql)) {

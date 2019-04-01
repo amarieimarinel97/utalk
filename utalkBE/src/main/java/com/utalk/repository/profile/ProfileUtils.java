@@ -30,6 +30,7 @@ public class ProfileUtils {
         int paramIndex = 0;
 
         profile.setId(resultSet.getInt(++paramIndex));
+        profile.setName(resultSet.getString(++paramIndex));
         profile.setPhoto(resultSet.getString(++paramIndex));
         profile.setOccupation(resultSet.getString(++paramIndex));
         profile.setBirthdate(resultSet.getDate(++paramIndex).toLocalDate());
@@ -42,6 +43,7 @@ public class ProfileUtils {
         checkNullParameters(connection, statement);
         int paramIndex = 0;
 
+        statement.setString(++paramIndex, profile.getName());
         statement.setString(++paramIndex, profile.getPhoto());
         statement.setString(++paramIndex, profile.getOccupation());
         statement.setDate(++paramIndex, Date.valueOf(profile.getBirthdate()));

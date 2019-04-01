@@ -34,7 +34,7 @@ public class DatabaseGenerator {
 
         profile.setPhoto(faker.lorem().sentence(1).split(" ",2)[0] + "." + photoExtensions[rand.nextInt(photoExtensions.length)]);
         profile.setOccupation(faker.lorem().sentence(1).split(" ",2)[0]);
-
+        profile.setName(faker.lorem().sentence(2).split(" ", 3)[0] + " "+faker.lorem().sentence(2).split(" ", 3)[1]);
         timestamp = new Timestamp(System.currentTimeMillis());
         profile.setBirthdate(faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         profile.setOccupation(faker.lorem().sentence(1).split(" ",2)[0]);
