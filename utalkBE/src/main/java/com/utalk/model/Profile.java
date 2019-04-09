@@ -1,7 +1,6 @@
 package com.utalk.model;
 
 
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class Profile {
@@ -10,8 +9,8 @@ public class Profile {
         id=-1;
     }
 
-    private String name;
     private Integer id;
+    private String name;
     private String photo;
     private String occupation;
     private String location;
