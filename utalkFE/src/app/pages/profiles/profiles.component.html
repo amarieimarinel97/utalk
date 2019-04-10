@@ -1,0 +1,25 @@
+<div class="wrapper" id="cover-photo">
+  <img src="../../../assets/profile.jpg" id="profile-pic">
+</div>
+
+<form>
+  <div class="wrapper" id="first-wrapper">
+    <label for="user">Name</label>
+    <input *ngIf="profile" id="name" type="text" [(ngModel)]="profile.name" [value]="profile.name" placeholder="John Smith" name="user">
+
+    <label for="pass">Password</label>
+    <input type="password" placeholder="••••••••" name="pass">
+  </div>
+
+  <div class="wrapper" id="last-wrapper">
+    <label for="user">Occupation</label>
+    <input *ngIf="profile" id="occupation" [(ngModel)]="profile.occupation" type="text" placeholder="Software engineer" [value]="profile.occupation" name="ocupation">
+    <label for="user">Location</label>
+    <input *ngIf="profile" id="location" [(ngModel)]="profile.location" type="text" placeholder="New Jersey" name="location" [value]="profile.location">
+    <label for="user">Birthdate</label>
+    <input *ngIf="profile" type="date" id="birthdate" [ngModel]="profile.birthdate | date:'yyyy-MM-dd'" (ngModelChange)="profile.birthdate = $event" [ngModelOptions]="{standalone: true}" [value]="profile.birthdate">
+    <div class="button unselectable" (click)="updateProfile()">
+      UPDATE
+    </div>
+  </div>
+</form>
