@@ -23,17 +23,6 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# misc
-/utalkFE/.sass-cache
-/utalkFE/connect.lock
-/utalkFE/coverage
-/utalkFE/libpeerconnection.log
-npm-debug.log
-yarn-error.log
-testem.log
-/utalkFE/typings
-#/utalkBE/src/main/resources/*.properties
-utalkBE/logs/*.txt
 
 # System Files
 .DS_Store
