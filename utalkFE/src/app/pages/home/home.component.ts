@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Profile } from 'src/app/models/profile';
 import { ProfilesService } from 'src/app/services/profilesservice/profiles.service';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-home',
@@ -14,13 +15,18 @@ export class HomeComponent implements OnInit {
     profilesService.getProfiles().subscribe(
       (profilesResponse: Profile[]) => {
         this.profile = profilesResponse[0];
+        if (this.profile.photo != "no-photo") {
+          document.getElementById("profile-pic").setAttribute("src", AppComponent.imagesPath + this.profile.photo);
+        } else {
+          console.log("This profile has no photo yet");
+        }
       },
       (err) => { console.log(err) }
     )
   }
 
   ngOnInit() {
-    
+
   }
 
 }

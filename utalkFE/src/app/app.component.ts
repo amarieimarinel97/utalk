@@ -10,6 +10,7 @@ export class AppComponent {
   title = 'utalkFE';
   static serverUrl = "http://localhost:8081/";
   static clientUrl = "http://localhost:4200/";
+  static imagesPath = "../../../assets/";
   constructor(private router: Router) {
   }
 }

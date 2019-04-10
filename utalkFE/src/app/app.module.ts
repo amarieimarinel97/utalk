@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { ProfilesComponent } from './pages/profiles/profiles.component';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },

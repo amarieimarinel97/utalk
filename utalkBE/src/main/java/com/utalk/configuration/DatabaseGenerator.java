@@ -31,8 +31,8 @@ public class DatabaseGenerator {
 
         String[] photoExtensions = {"jpg", "png", "jpeg", "bmp"};
 
-
-        profile.setPhoto(faker.lorem().sentence(1).split(" ",2)[0] + "." + photoExtensions[rand.nextInt(photoExtensions.length)]);
+//        profile.setPhoto(faker.lorem().sentence(1).split(" ",2)[0] + "." + photoExtensions[rand.nextInt(photoExtensions.length)]);
+        profile.setPhoto("no-photo");
         profile.setOccupation(faker.lorem().sentence(1).split(" ",2)[0]);
         profile.setName(faker.lorem().sentence(2).split(" ", 3)[0] + " "+faker.lorem().sentence(2).split(" ", 3)[1]);
         timestamp = new Timestamp(System.currentTimeMillis());
