@@ -1,0 +1,42 @@
+
+# dependencies
+/utalkFE/node_modules
+
+# IDEs and editors
+/utalkBE/.idea/
+/utalkBE/*.iml
+/utalkBE/*.ipr
+/utalkBE/*.iws
+/utalkBE/target/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/utalkFE/.sass-cache
+/utalkFE/connect.lock
+/utalkFE/coverage
+/utalkFE/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/utalkFE/typings
+#/utalkBE/src/main/resources/*.properties
+utalkBE/logs/*.txt
+
+# System Files
+.DS_Store
+Thumbs.db
+
+
