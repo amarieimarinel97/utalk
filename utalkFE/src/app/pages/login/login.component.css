@@ -18,10 +18,6 @@
     background-attachment: fixed;
 }
 
-#cover-photo input[type="file"] {
-    display: none;
-}
-
 #profile-pic {
     width: 12rem;
     height: 12rem;
@@ -31,33 +27,7 @@
     margin-top: 100px;
     object-fit: cover;
     filter: drop-shadow(0 0 0.75rem #bbb);
-    cursor: pointer;
-    transition: .5s ease;
-}
-
-#profile-container:hover #profile-pic {
-    filter: blur(1px) drop-shadow(0 0 0.75rem #bbb);
-}
-
-#profile-container:hover #upload-text {
-    opacity: 1;
-}
-
-#upload-text {
-    transition: .5s ease;
-    opacity: 0;
-    position: absolute;
-    top: 37.5%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    text-align: center;
-    font-weight: 400;
-    font-family: "Roboto";
-    color: #ddd;
-    font-size: 1.2rem;
-    cursor: pointer;
-    filter: drop-shadow(0 0 0.5rem #000);
+    user-select: none;
 }
 
 form {
@@ -96,49 +66,40 @@ input[type=text], input[type=password], input[type=date] {
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
-    cursor: pointer;
     width: 5rem;
     margin-left: calc(50% - 2.5rem - 10px);
     margin-right: calc(50% - 2.5rem - 10px);
     border-radius: 5px;
     text-align: center;
+    user-select: none;
 }
 
-input[type=date]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    display: none;
+.valid-button {
+    background-color: rgb(140, 220, 140);
+    cursor: pointer;
 }
 
-input[type=date]::-webkit-calendar-picker-indicator {
-    /* -webkit-appearance: none; */
-    /* display: none; */
+.invalid-button {
+    cursor: default;
+    background-color: #999;
 }
 
-.button:hover {
-    opacity: 0.8;
-}
-
-#last-wrapper {
-    margin-bottom: 5rem;
-}
-
-
-#home-link{
-    float:left;
-    margin-top:-10px;
-    margin-left:-15px;
-    width:8%;
+#register-link {
+    width:10%;
+    margin-left: 45%;
+    margin-right: 45%;
     text-align: center;
     text-decoration: none;
     font-size: 1rem;
     font-family: 'Roboto';
-    color: #888;
+    color: #aaa;
+    padding-top: 10px;
     display: block;
     font-weight: 200;
     font-size: 0.8rem;
     cursor: pointer;
 }
 
-#home-link:hover{
+#register-link:hover {
     color: rgb(74, 138, 223);
 }

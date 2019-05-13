@@ -6,5 +6,11 @@
     <a class="menu-link" href="#newsfeed">Newsfeed</a>
     <a class="menu-link" [routerLink]="'/profiles'">Profile</a>
     <a class="menu-link" href="#friends">Friends</a>
+    <div id="submenu">
     <a class="menu-link" id="contact-link" [routerLink]="'/contact'">Contact</a>
+    <a class="menu-link" id="sitemap-link" [routerLink]="'/sitemap'">Site map</a>
+    <a class="menu-link" id="aboutus-link" [routerLink]="'/aboutus'">About Us</a>
+    </div>
+    <a class="menu-link" id="useful-link">Useful Links</a>
+    <a class="menu-link" id="logout-link" (click)="logOut()">Log Out</a>
   </aside>
