@@ -1,15 +1,42 @@
 package com.utalk.configuration;
 
 import com.github.javafaker.Faker;
+import com.utalk.model.Friendship;
 import com.utalk.model.Profile;
 import com.utalk.repository.DatabaseConnection;
+import com.utalk.repository.friendship.FriendshipRepository;
 import com.utalk.repository.profile.ProfileRepository;
+
+import javafx.util.Pair;
 import org.springframework.context.annotation.Configuration;
 
 import java.sql.*;
 import java.time.ZoneId;
 import java.util.*;
 
+
+class Tupla {
+    private int a,b;
+    public Tupla(int x, int y){
+        a=x;
+        b=y;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Tupla tupla = (Tupla) o;
+        return a == tupla.a &&
+                b == tupla.b;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(a, b);
+    }
+
+}
 
 @Configuration
 public class DatabaseGenerator {
@@ -21,6 +48,10 @@ public class DatabaseGenerator {
     private static List<Profile> profiles=new ArrayList<>();
     private static ProfileRepository profileRepository = new ProfileRepository();
 
+    private static List<Pair<Friendship,Friendship>> friendships=new ArrayList<>();
+    private static FriendshipRepository friendshipRepository = new FriendshipRepository();
+
+    static HashSet<Tupla> s =new HashSet<>();
 
     public DatabaseGenerator() {
     }
@@ -42,7 +73,25 @@ public class DatabaseGenerator {
         return profile;
     }
 
-    public static void generateData(int noOfProfiles) {
+    public static Pair<Friendship,Friendship> generateFriendship() {
+        Pair<Friendship,Friendship> p;
+        Friendship friendship = new Friendship();
+        Friendship friendship1 = new Friendship();
+
+        int a=0,b=0;
+        int ok=0;
+
+            while (a == b) {
+                friendship.setUser_id1(a = profiles.get(rand.nextInt(profiles.size())).getId());
+                friendship.setUser_id2(b = profiles.get(rand.nextInt(profiles.size())).getId());
+            }
+        friendship1.setUser_id1(b);
+        friendship1.setUser_id2(a);
+
+        p=new Pair<>(friendship,friendship1);
+        return p;
+    }
+    public static void generateData(int noOfProfiles, int nFriendships) {
         System.out.println("Creating tables and generating Data");
 
         try (Connection connection = DatabaseConnection.getConnection()) {
@@ -57,6 +106,19 @@ public class DatabaseGenerator {
             for (Profile profile : profiles) {
                 profileRepository.create(connection, profile);
                 System.out.println("Generated new profile");
+            }
+
+            friendshipRepository.deleteAll(connection);
+            System.out.println("Deleted previous friendsships");
+
+            for (int i = 0; i < nFriendships; i++) {
+                friendships.add(generateFriendship());
+            }
+            for (Pair<Friendship,Friendship> friendship : friendships) {
+                friendshipRepository.create(connection, friendship.getKey());
+                friendshipRepository.create(connection, friendship.getValue());
+
+                System.out.println("Generated new friendship");
             }
 
         } catch (RuntimeException | SQLException exception) {
@@ -338,6 +400,6 @@ public class DatabaseGenerator {
 //    }
 
     static {
-        generateData(50);
+        generateData(50,100);
     }
 }

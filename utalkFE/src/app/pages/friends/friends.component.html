@@ -1,0 +1,30 @@
+
+<section id = "menu">
+<aside id="menu" class="background-image">
+  <a [routerLink]="'/profiles'"><img src="../../../assets/profile.jpg" id="profile-pic"></a>
+  <p *ngIf="profile" id="profile-name">{{profile.name}}</p>
+  <p *ngIf="profile" id="occupation">{{profile.occupation}}</p>
+  <p>MENUS</p>
+  <a class="menu-link" href="#newsfeed" [routerLink]="'/posts'">Newsfeed</a>
+  <a class="menu-link" [routerLink]="'/profiles'">Profile</a>
+  <a class="menu-link" [routerLink]="'/friends'" >Friends</a>
+  <a class="menu-link" href="#contact">Contact</a>
+</aside>
+</section>
+<div class="cap" align="center">My Friends </div>
+<section id="outputDiv" align="center">
+  
+     
+  
+     
+
+  </section>
+  
+ 
+
+
+
+
+  
+
+
