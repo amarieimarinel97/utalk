@@ -365,6 +365,6 @@ public class DatabaseGenerator {
 //    }
 
     static {
-//        generateData(50);
+        generateData(50);
     }
 }
