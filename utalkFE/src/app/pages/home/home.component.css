@@ -37,6 +37,7 @@
     padding: 0 !important;
     font-size: 1.25rem !important;
     margin-bottom:0;
+    filter: drop-shadow(0 0 0.75rem #ffffff);
 }
 
 #menu p {
@@ -57,7 +58,7 @@
     width: 8rem;
     height: 8rem;
     padding: 5px calc(50% - 4rem);
-    object-fit: cover;
+    object-fit: cover !important;
     filter: drop-shadow(0 0 0.75rem #ffffff);
 }
 
@@ -66,3 +67,24 @@
     padding-top:0 !important;
     font-size:0.7rem !important;
 }
+
+#home-link{
+    display:none;
+}
+
+#submenu {
+    visibility: hidden;
+    transition: 0.2s; 
+  }
+
+  #useful-link{
+      cursor: pointer;
+      position: absolute;
+      bottom: 3.8rem;
+  }
+
+  #logout-link{
+      cursor:pointer;
+      position: absolute;
+      bottom: 2.4rem;
+  }

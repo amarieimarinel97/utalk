@@ -8,12 +8,23 @@ import { PostsComponent } from './pages/posts/posts.component';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FriendsComponent } from './pages/friends/friends.component';
+import { ContactComponent } from './pages/contact/contact.component';
+import { SiteMapComponent } from './pages/site-map/site-map.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { LoginComponent } from './pages/login/login.component';
+import { FriendsPageComponent } from './pages/friends-page/friends-page.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'posts', component: PostsComponent },
+  { path: 'friends', component: FriendsPageComponent },
+  { path: 'contact', component: ContactComponent },
   { path: 'profiles', component: ProfilesComponent },
-  { path: 'posts', component: PostsComponent }
+  { path: 'sitemap', component: SiteMapComponent },
+  { path: 'aboutus', component: AboutUsComponent }
 ]
 
 
@@ -22,7 +33,13 @@ const routes: Routes = [
     AppComponent,
     ProfilesComponent,
     PostsComponent,
-    HomeComponent
+    HomeComponent,
+    FriendsComponent,
+    ContactComponent,
+    SiteMapComponent,
+    AboutUsComponent,
+    LoginComponent,
+    FriendsPageComponent
   ],
   imports: [
     BrowserModule,

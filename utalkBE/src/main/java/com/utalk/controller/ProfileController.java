@@ -19,6 +19,7 @@ public class ProfileController {
     @Autowired
     private ProfileService profileService;
 
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Profile> getProfiles() {
         return profileService.getAll();

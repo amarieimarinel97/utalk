@@ -1,0 +1,10 @@
+<div class="cap">My Friends </div>
+<div class="wrapper">
+    <div class="friend-content" *ngFor="let friend of currentFriends">
+        <div class="friend-wrapper"> <img class="friend-photo" src="../../../assets/{{friend.photo}}">
+            <div class="friend-info">{{friend.name}}
+                <div class="friend-occupation">{{friend.occupation}}</div>
+            </div>
+        </div>
+    </div>
+</div>

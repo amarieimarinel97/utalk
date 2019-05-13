@@ -1,0 +1,72 @@
+app-home{
+    display:block;
+}
+
+
+#friends-content{
+    width:100%;
+    border:none;
+    height:100%;
+}
+
+.wrapper {
+    border-radius: 5px;
+    background-color: #ddd;
+    width: 70%;
+    margin: 20px 5% 15px 25%;
+    height: auto;
+    position: absolute;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 20px;
+    overflow:visible;   
+}
+
+.friend-wrapper{
+    width:90%;
+    margin-left:5%;
+    margin-right:5%;
+    margin-bottom: 4rem;
+    background-color: #fff;
+}
+
+.friend-info{
+    float:left;
+    margin-top:1rem;
+    color: #333;
+    font-family: 'Roboto';
+    font-size: 1.2rem;
+    font-weight: 200;
+    margin-left:2rem;
+}
+
+.friend-photo{
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    object-fit: cover;
+    /* filter: drop-shadow(0 0 0.75rem #ffffff); */
+    float:left;
+}
+
+.friend-content{
+    /* border: 1px red solid; */
+    width:90%;
+    margin-left:5%;
+    margin-right:5%;
+    margin-bottom: 1rem;
+    display:block;
+
+
+    background-image: linear-gradient(to right, #aaa, #ddd);
+    padding: 5px;
+    overflow:visible;   
+}
+
+.friend-occupation{
+    color:#555;
+    font-size: 0.8rem;
+    text-align:left;
+    margin-left:2rem;
+
+}
