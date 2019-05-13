@@ -4,14 +4,16 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { ProfilesComponent } from './pages/profiles/profiles.component';
+import { PostsComponent } from './pages/posts/posts.component';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'profiles', component: ProfilesComponent }
+  { path: 'profiles', component: ProfilesComponent },
+  { path: 'posts', component: PostsComponent }
 ]
 
 
@@ -19,6 +21,7 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     ProfilesComponent,
+    PostsComponent,
     HomeComponent
   ],
   imports: [

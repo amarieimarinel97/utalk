@@ -13,10 +13,6 @@ export class ProfilesComponent implements OnInit {
   profile: Profile = null;
   allProfiles: Profile[] = [];
 
-
-
-
-
   constructor(private profilesService: ProfilesService,
     private route: ActivatedRoute,
     private router: Router) {

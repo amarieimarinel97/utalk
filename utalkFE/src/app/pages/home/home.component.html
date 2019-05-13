@@ -3,7 +3,7 @@
     <p *ngIf="profile" id="profile-name">{{profile.name}}</p>
     <p *ngIf="profile" id="occupation">{{profile.occupation}}</p>
     <p>MENUS</p>
-    <a class="menu-link" href="#newsfeed">Newsfeed</a>
+    <a class="menu-link" href="#newsfeed" [routerLink]="'/posts'">Newsfeed</a>
     <a class="menu-link" [routerLink]="'/profiles'">Profile</a>
     <a class="menu-link" href="#friends">Friends</a>
     <a class="menu-link" href="#contact">Contact</a>

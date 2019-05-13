@@ -1,8 +1,10 @@
 package com.utalk.configuration;
 
 import com.github.javafaker.Faker;
+import com.utalk.model.Post;
 import com.utalk.model.Profile;
 import com.utalk.repository.DatabaseConnection;
+import com.utalk.repository.posts.PostsRepository;
 import com.utalk.repository.profile.ProfileRepository;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,8 +20,11 @@ public class DatabaseGenerator {
     private static Random rand = new Random();
 
 
-    private static List<Profile> profiles=new ArrayList<>();
+    private static List<Profile> profiles = new ArrayList<>();
     private static ProfileRepository profileRepository = new ProfileRepository();
+
+    private static List<Post> posts = new ArrayList<>();
+    private static PostsRepository postsRepository = new PostsRepository();
 
 
     public DatabaseGenerator() {
@@ -32,17 +37,25 @@ public class DatabaseGenerator {
         String[] photoExtensions = {"jpg", "png", "jpeg", "bmp"};
 
 
-        profile.setPhoto(faker.lorem().sentence(1).split(" ",2)[0] + "." + photoExtensions[rand.nextInt(photoExtensions.length)]);
-        profile.setOccupation(faker.lorem().sentence(1).split(" ",2)[0]);
-        profile.setName(faker.lorem().sentence(2).split(" ", 3)[0] + " "+faker.lorem().sentence(2).split(" ", 3)[1]);
+        profile.setPhoto(faker.lorem().sentence(1).split(" ", 2)[0] + "." + photoExtensions[rand.nextInt(photoExtensions.length)]);
+        profile.setOccupation(faker.lorem().sentence(1).split(" ", 2)[0]);
+        profile.setName(faker.lorem().sentence(2).split(" ", 3)[0] + " " + faker.lorem().sentence(2).split(" ", 3)[1]);
         timestamp = new Timestamp(System.currentTimeMillis());
         profile.setBirthdate(faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        profile.setOccupation(faker.lorem().sentence(1).split(" ",2)[0]);
-        profile.setLocation(faker.lorem().sentence(1).split(" ",2)[0]);
+        profile.setOccupation(faker.lorem().sentence(1).split(" ", 2)[0]);
+        profile.setLocation(faker.lorem().sentence(1).split(" ", 2)[0]);
         return profile;
     }
 
-    public static void generateData(int noOfProfiles) {
+
+    public static Post generatePost() {
+        Post post = new Post();
+        post.setProfile_id(profiles.get(rand.nextInt(profiles.size())).getId());
+        post.setPosted_on(faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        post.setContent(faker.lorem().sentence(10));
+        return post;
+    }
+    public static void generateData(int noOfProfiles, int noOfPosts) {
         System.out.println("Creating tables and generating Data");
 
         try (Connection connection = DatabaseConnection.getConnection()) {
@@ -57,6 +70,17 @@ public class DatabaseGenerator {
             for (Profile profile : profiles) {
                 profileRepository.create(connection, profile);
                 System.out.println("Generated new profile");
+            }
+
+            postsRepository.deleteAll(connection);
+            System.out.println("Deleted previous posts");
+
+            for (int i = 0; i < noOfPosts; i++) {
+                posts.add(generatePost());
+            }
+            for (Post post : posts) {
+                postsRepository.create(connection, post);
+                System.out.println("Generated new post");
             }
 
         } catch (RuntimeException | SQLException exception) {
@@ -338,6 +362,6 @@ public class DatabaseGenerator {
 //    }
 
     static {
-        generateData(50);
+        generateData(50, 100);
     }
 }
