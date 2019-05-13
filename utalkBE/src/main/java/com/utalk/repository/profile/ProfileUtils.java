@@ -18,9 +18,9 @@ public class ProfileUtils {
                 return buildElementFromResultSet(connection, resultSet);
             }
         } catch (SQLException exceptionSQL) {
-            System.out.println("Failed to get question: " + exceptionSQL.getMessage());
+            System.out.println("Failed to get profile: " + exceptionSQL.getMessage());
         }
-        System.out.println("Question Not Found");
+        System.out.println("Profile Not Found");
         return null;
     }
 

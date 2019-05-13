@@ -4,10 +4,8 @@ import { ProfilesService } from 'src/app/services/profilesservice/profiles.servi
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppComponent } from 'src/app/app.component';
-import {Friends} from 'src/app/models/friend'
+import { Friends } from 'src/app/models/friend'
 import { FriendService } from 'src/app/services/friendservice/friend.service';
-
-
 
 
 @Component({
@@ -17,119 +15,81 @@ import { FriendService } from 'src/app/services/friendservice/friend.service';
 })
 export class FriendsComponent implements OnInit {
 
-  friend : Friends = null;
-  allFriends: Friends[]=[];
-  profile: Profile = null;
+  friend: Friends = null;
+  allFriends: Friends[] = [];
+  currentFriends: Profile[] = [];
+  photoUrl: string = "";
+  thisProfile: Profile = null;
   allProfiles: Profile[] = [];
-
   selectedFile: File = null;
+  currentFriendsIds: number[] = [];
 
-  
+
 
   constructor(private profilesService: ProfilesService,
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
     private friendService: FriendService) {
-    profilesService.getProfiles().subscribe(
-      (profilesResponse: Profile[]) => {
-        this.allProfiles = profilesResponse as Profile[];
-        this.profile = this.allProfiles[0];
-        
-        if (this.profile.photo != "no-photo") {
-          document.getElementById("profile-pic").setAttribute("src", AppComponent.imagesPath + this.profile.photo);
-        } else {
-          console.log("This profile has no photo yet");
-        }
-      }
-      , (err) => {
-        console.log(err);
-      }
-    );
+    if (window.localStorage.getItem("profile-id")) {
+      this.photoUrl = AppComponent.imagesPath;
+      profilesService.getProfileById(parseInt(window.localStorage.getItem("profile-id"))).subscribe(
+        (profileResponse: Profile) => {
+          this.thisProfile = profileResponse;
+        },
+        (err) => { this.router.navigate(['/login']); }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
+
     friendService.getAllFriends().subscribe(
-      (friendsResponse: Friends[])  => {
+      (friendsResponse: Friends[]) => {
         this.allFriends = friendsResponse as Friends[];
-        this.friend = this.allFriends[0];
-        var profil = this.profile;
 
-       // var HTML = "<table border=1 width=100%><td>";
-        var j;
-        var HTML = "<p><p>";
-         for(j=0;j<this.allFriends.length;j++)
-       {
-         
-        //HTML += "<td align=center>"+String.fromCharCode(j+64)+"</td>";
-        if (profil.id ==this.allFriends[j].user_id2 ){
-        for(var x=0;x<this.allProfiles.length;++x){
-          if(this.allProfiles[x].id == this.allFriends[j].user_id1){
-        HTML += "<p align=center>" + this.allProfiles[x].id+" "+ this.allProfiles[x].name + "   <img src= " +AppComponent.imagesPath + this.profile.photo + ">"+ " </p>";
+        this.allFriends.forEach((friend) => {
+          if (friend.user_id1 == parseInt(window.localStorage.getItem("profile-id"))) {
+            this.currentFriendsIds.push(friend.user_id2);
           }
-         }
-        }
-       }
-       //HTML += "</td></table>";
-      
-
-        document.getElementById("outputDiv").innerHTML = HTML; 
-
-      }
-      , (err) => {
+        });
+        this.currentFriendsIds.forEach((friendId) => {
+          this.profilesService.getProfileById(friendId).subscribe(
+            (profileResponse: Profile) => {
+              this.currentFriends.push(profileResponse);
+            }
+          );
+        });
+      },
+      (err) => {
         console.log(err);
       }
-    
+
     );
-   // alert(this.friend);
-  //    this.draw();
-  
+
   }
- 
+
   public updateProfile(redirect: boolean) {
-    this.profilesService.updateProfile(this.profile).subscribe(() => {
+    this.profilesService.updateProfile(this.thisProfile).subscribe(() => {
       if (redirect)
         this.router.navigate(['/home']);
     });
   }
 
   testIt() {
-    console.log(this.profile.photo);
+    console.log(this.thisProfile.photo);
   }
-  
-  
 
-  public draw(){
-    var HTML = "<table border=1 width=100%><td>";
-    for(var j=1;j<=10;j++)
-   {
-      //HTML += "<td align=center>"+String.fromCharCode(j+64)+"</td>";
-      HTML += "<p><tr align=center> asdasd </tr></p>";
-   }
-   HTML += "</td></table>";
-   document.getElementById("outputDiv").innerHTML = HTML;
-  }
- 
-
-  
-
-  
-  
-  public drawFriends(){
-    var HTML = "<table border=1 width=100%><td>";
-    for(var j=0;j<10;j++){
-      HTML += "<p><tr align=center> asdasd </tr></p>";
+  areAllFriendsLoaded(): boolean {
+    if (this.currentFriends && this.currentFriendsIds && this.currentFriends.length > 0 && this.currentFriendsIds.length == this.currentFriends.length) {
+      return true;
     }
-    HTML += "</td></table>";
-    document.getElementById("outputDiv").innerHTML = HTML;
+    return false;
   }
-  
+
+
   ngOnInit() {
-    //this.draw();
-    //this.drawFriends();
-    //this.alerta();  
-  // alert(this.allFriends[0]);
-  
-    
   }
-  
-  
+
+
 
 }

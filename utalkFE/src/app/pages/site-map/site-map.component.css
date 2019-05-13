@@ -1,8 +1,7 @@
 app-home{
     display:block;
 }
-
-#contact-content{
+#site-map-content{
     width:100%;
     border:none;
     height:100%;
@@ -19,7 +18,4 @@ app-home{
     box-sizing: border-box;
     padding: 20px;
     overflow:visible;   
-}
-#contact-form{
-    color:red;
 }

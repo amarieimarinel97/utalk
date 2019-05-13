@@ -4,6 +4,8 @@ import { ProfilesService } from 'src/app/services/profilesservice/profiles.servi
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppComponent } from 'src/app/app.component';
+import { UsersService } from 'src/app/services/usersservice/users.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-profiles',
@@ -14,28 +16,30 @@ export class ProfilesComponent implements OnInit {
 
   profile: Profile = null;
   allProfiles: Profile[] = [];
-
+  currentPassword: string = "";
   selectedFile: File = null;
 
 
-  constructor(private profilesService: ProfilesService,
+  constructor(private usersService: UsersService,
+    private profilesService: ProfilesService,
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient) {
-    profilesService.getProfiles().subscribe(
-      (profilesResponse: Profile[]) => {
-        this.allProfiles = profilesResponse as Profile[];
-        this.profile = this.allProfiles[0];
-        if (this.profile.photo != "no-photo") {
-          document.getElementById("profile-pic").setAttribute("src", AppComponent.imagesPath + this.profile.photo);
-        } else {
-          console.log("This profile has no photo yet");
-        }
-      }
-      , (err) => {
-        console.log(err);
-      }
-    );
+    if (window.localStorage.getItem("profile-id")) {
+      profilesService.getProfileById(parseInt(window.localStorage.getItem("profile-id"))).subscribe(
+        (profileResponse: Profile) => {
+          this.profile = profileResponse;
+          if (this.profile.photo != "no-photo") {
+            document.getElementById("profile-pic").setAttribute("src", AppComponent.imagesPath + this.profile.photo);
+          } else {
+            console.log("This profile has no photo yet");
+          }
+        },
+        (err) => { this.router.navigate(['/login']); }
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
 
   }
 
@@ -61,15 +65,41 @@ export class ProfilesComponent implements OnInit {
     this.onUpload();
   }
 
+  isPasswordValid(): boolean {
+    if (this.currentPassword.length < 4 || this.currentPassword.includes(" ")) {
+      return false;
+    }
+    return true;
+  }
+
   public updateProfile(redirect: boolean) {
     this.profilesService.updateProfile(this.profile).subscribe(() => {
-      if (redirect)
-        this.router.navigate(['/home']);
+      if (this.isPasswordValid()) {
+        this.usersService.getUserById(this.profile.id).subscribe(
+          (userResponse: User) => {
+            var currUser = userResponse;
+            currUser.password = this.currentPassword;
+            console.log(currUser);
+            this.usersService.updateUser(currUser).subscribe(
+              (user: User) => {
+                if (redirect) {
+                  this.router.navigate(['/home']);
+                }
+              },
+              (err) => { console.log(err); }
+            );
+          }
+        );
+      }else{
+        if (redirect) {
+          this.router.navigate(['/home']);
+        }
+      }
     });
   }
 
   testIt() {
-    console.log(this.profile.photo);
+    console.log("Current password=" + this.currentPassword);
   }
 
   ngOnInit() {

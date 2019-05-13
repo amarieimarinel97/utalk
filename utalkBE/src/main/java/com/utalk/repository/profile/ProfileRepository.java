@@ -14,7 +14,6 @@ import static com.utalk.model.ModelUtils.checkNullFields;
 import static com.utalk.model.ModelUtils.checkNullParameters;
 
 @Repository
-
 public class ProfileRepository implements CrudRepository<Profile> {
 
     private static final ProfileUtils repositoryUtils = new ProfileUtils();

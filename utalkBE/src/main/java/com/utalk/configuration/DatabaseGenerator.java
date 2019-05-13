@@ -3,40 +3,17 @@ package com.utalk.configuration;
 import com.github.javafaker.Faker;
 import com.utalk.model.Friendship;
 import com.utalk.model.Profile;
+import com.utalk.model.User;
 import com.utalk.repository.DatabaseConnection;
 import com.utalk.repository.friendship.FriendshipRepository;
 import com.utalk.repository.profile.ProfileRepository;
-
 import javafx.util.Pair;
+import com.utalk.repository.user.UserRepository;
 import org.springframework.context.annotation.Configuration;
 
 import java.sql.*;
 import java.time.ZoneId;
 import java.util.*;
-
-
-class Tupla {
-    private int a,b;
-    public Tupla(int x, int y){
-        a=x;
-        b=y;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Tupla tupla = (Tupla) o;
-        return a == tupla.a &&
-                b == tupla.b;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(a, b);
-    }
-
-}
 
 @Configuration
 public class DatabaseGenerator {
@@ -45,13 +22,14 @@ public class DatabaseGenerator {
     private static Random rand = new Random();
 
 
-    private static List<Profile> profiles=new ArrayList<>();
+    private static List<Profile> profiles = new ArrayList<>();
+    private static List<User> users = new ArrayList<>();
+    private static UserRepository userRepository = new UserRepository();
     private static ProfileRepository profileRepository = new ProfileRepository();
 
     private static List<Pair<Friendship,Friendship>> friendships=new ArrayList<>();
     private static FriendshipRepository friendshipRepository = new FriendshipRepository();
 
-    static HashSet<Tupla> s =new HashSet<>();
 
     public DatabaseGenerator() {
     }
@@ -59,17 +37,15 @@ public class DatabaseGenerator {
 
     public static Profile generateProfile() {
         Profile profile = new Profile();
-
-        String[] photoExtensions = {"jpg", "png", "jpeg", "bmp"};
-
-//        profile.setPhoto(faker.lorem().sentence(1).split(" ",2)[0] + "." + photoExtensions[rand.nextInt(photoExtensions.length)]);
-        profile.setPhoto("no-photo");
-        profile.setOccupation(faker.lorem().sentence(1).split(" ",2)[0]);
-        profile.setName(faker.lorem().sentence(2).split(" ", 3)[0] + " "+faker.lorem().sentence(2).split(" ", 3)[1]);
+        Random random=new Random();
+        int noOfRandomPhoto = random.nextInt(6)+1;
+        profile.setPhoto("profile"+noOfRandomPhoto+".jpg");
+        profile.setOccupation(faker.lorem().sentence(1).split(" ", 2)[0]);
+        profile.setName(faker.lorem().sentence(2).split(" ", 3)[0] + " " + faker.lorem().sentence(2).split(" ", 3)[1]);
         timestamp = new Timestamp(System.currentTimeMillis());
         profile.setBirthdate(faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        profile.setOccupation(faker.lorem().sentence(1).split(" ",2)[0]);
-        profile.setLocation(faker.lorem().sentence(1).split(" ",2)[0]);
+        profile.setOccupation(faker.lorem().sentence(1).split(" ", 2)[0]);
+        profile.setLocation(faker.lorem().sentence(1).split(" ", 2)[0]);
         return profile;
     }
 
@@ -91,11 +67,25 @@ public class DatabaseGenerator {
         p=new Pair<>(friendship,friendship1);
         return p;
     }
+
+    public static User generateUser(Integer profile_id) {
+        User user = new User();
+        user.setPassword(faker.lorem().word());
+        String secondWord = faker.lorem().word().toLowerCase();
+        secondWord = secondWord.substring(0, 1).toUpperCase() + secondWord.substring(1);
+        user.setUsername(faker.lorem().word().toLowerCase() + secondWord);
+        user.setProfile_id(profile_id);
+        return user;
+    }
+
     public static void generateData(int noOfProfiles, int nFriendships) {
         System.out.println("Creating tables and generating Data");
 
         try (Connection connection = DatabaseConnection.getConnection()) {
             DatabaseConnection.initDatabase(connection);
+
+            userRepository.deleteAll(connection);
+            System.out.println("Deleted previous users");
 
             profileRepository.deleteAll(connection);
             System.out.println("Deleted previous profiles");
@@ -105,11 +95,12 @@ public class DatabaseGenerator {
             }
             for (Profile profile : profiles) {
                 profileRepository.create(connection, profile);
+                users.add(generateUser(profile.getId()));
                 System.out.println("Generated new profile");
             }
 
             friendshipRepository.deleteAll(connection);
-            System.out.println("Deleted previous friendsships");
+            System.out.println("Deleted previous friendships");
 
             for (int i = 0; i < nFriendships; i++) {
                 friendships.add(generateFriendship());
@@ -117,12 +108,22 @@ public class DatabaseGenerator {
             for (Pair<Friendship,Friendship> friendship : friendships) {
                 friendshipRepository.create(connection, friendship.getKey());
                 friendshipRepository.create(connection, friendship.getValue());
-
                 System.out.println("Generated new friendship");
             }
 
         } catch (RuntimeException | SQLException exception) {
-            System.out.println("Failed to initialise database tables with data: " + exception.getMessage());
+            System.out.println("Failed to initialise database profiles table with data: " + exception.getMessage());
+        }
+
+
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            for (User user : users) {
+                userRepository.create(connection, user);
+                System.out.println("Generated new user");
+            }
+
+        } catch (RuntimeException | SQLException exception) {
+            System.out.println("Failed to initialise database users table with data: " + exception.getMessage());
         }
     }
 
@@ -400,6 +401,6 @@ public class DatabaseGenerator {
 //    }
 
     static {
-        generateData(50,100);
+        generateData(50,200);
     }
 }

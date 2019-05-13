@@ -1,79 +1,72 @@
-.background-image {
-    background-image: url("../../../assets/background.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+app-home{
+    display:block;
 }
 
-#menu {
-    height: 100%;
-    width: 20%;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    padding-top: 20px;
-    user-select: none;
+
+#friends-content{
+    width:100%;
+    border:none;
+    height:100%;
 }
 
-#menu .menu-link {
-    width: 100%;
+.wrapper {
+    border-radius: 5px;
+    background-color: #ddd;
+    width: 70%;
+    margin: 20px 5% 15px 25%;
+    height: auto;
+    position: absolute;
     text-align: center;
-    text-decoration: none;
-    font-size: 1rem;
+    box-sizing: border-box;
+    padding: 20px;
+    overflow:visible;   
+}
+
+.friend-wrapper{
+    width:90%;
+    margin-left:5%;
+    margin-right:5%;
+    margin-bottom: 4rem;
+    background-color: #fff;
+}
+
+.friend-info{
+    float:left;
+    margin-top:1rem;
+    color: #333;
     font-family: 'Roboto';
-    color: #aaa;
-    padding-top: 10px;
-    display: block;
+    font-size: 1.2rem;
     font-weight: 200;
-    font-size: 0.8rem;
+    margin-left:2rem;
 }
 
-#profile-name {
-    color: #4f4f4f !important;
-    padding: 0 !important;
-    font-size: 1.25rem !important;
-    margin-bottom:0;
-}
-
-#menu p {
-    padding-top: 20px;
-    width: 100%;
-    text-align: center;
-    font-size: 1rem;
-    font-family: 'Roboto';
-    color: #b0b0b0;
-}
-
-#menu .menu-link:hover {
-    color: rgb(74, 138, 223);
-}
-
-#profile-pic {
+.friend-photo{
     border-radius: 50%;
-    width: 8rem;
-    height: 8rem;
-    padding: 5px calc(50% - 4rem);
+    width: 4rem;
+    height: 4rem;
     object-fit: cover;
-    filter: drop-shadow(0 0 0.75rem #ffffff);
+    /* filter: drop-shadow(0 0 0.75rem #ffffff); */
+    float:left;
 }
 
-#occupation{
-    margin-top:0;
-    padding-top:0 !important;
-    font-size:0.7rem !important;
+.friend-content{
+    /* border: 1px red solid; */
+    width:90%;
+    margin-left:5%;
+    margin-right:5%;
+    margin-bottom: 1rem;
+    display:block;
+
+
+    background-image: linear-gradient(to right, #aaa, #ddd);
+    padding: 5px;
+    overflow:visible;   
 }
 
-#lista{
-    text-align: center;
-}
-#tabel{
-    text-align: center;
-}
-.cap{
-    text-decoration-color: darkred;
-    text-decoration-style: solid;
+.friend-occupation{
+    color:#555;
+    font-size: 0.8rem;
+    text-align:left;
+    margin-left:2rem;
+
 }
