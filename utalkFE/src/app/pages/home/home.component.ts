@@ -25,8 +25,6 @@ export class HomeComponent implements OnInit {
         (profileResponse: Profile) => {
           this.profile = profileResponse;
           document.getElementById("profile-pic").setAttribute("src", AppComponent.imagesPath + this.profile.photo);
-          console.log(AppComponent.imagesPath + this.profile.photo);
-
         },
         (err) => { console.log(err) }
       );

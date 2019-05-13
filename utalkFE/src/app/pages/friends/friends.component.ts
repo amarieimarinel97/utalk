@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Profile } from 'src/app/models/profile';
 import { ProfilesService } from 'src/app/services/profilesservice/profiles.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,11 +11,11 @@ import { FriendService } from 'src/app/services/friendservice/friend.service';
 @Component({
   selector: 'app-friends',
   templateUrl: './friends.component.html',
-  styleUrls: ['./friends.component.css']
+  styleUrls: ['./friends.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class FriendsComponent implements OnInit {
 
-  friend: Friends = null;
   allFriends: Friends[] = [];
   currentFriends: Profile[] = [];
   photoUrl: string = "";
@@ -68,16 +68,6 @@ export class FriendsComponent implements OnInit {
 
   }
 
-  public updateProfile(redirect: boolean) {
-    this.profilesService.updateProfile(this.thisProfile).subscribe(() => {
-      if (redirect)
-        this.router.navigate(['/home']);
-    });
-  }
-
-  testIt() {
-    console.log(this.thisProfile.photo);
-  }
 
   areAllFriendsLoaded(): boolean {
     if (this.currentFriends && this.currentFriendsIds && this.currentFriends.length > 0 && this.currentFriendsIds.length == this.currentFriends.length) {

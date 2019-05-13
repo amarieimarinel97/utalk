@@ -14,17 +14,20 @@ import { SiteMapComponent } from './pages/site-map/site-map.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { LoginComponent } from './pages/login/login.component';
 import { FriendsPageComponent } from './pages/friends-page/friends-page.component';
+import { NewsfeedComponent } from './pages/newsfeed/newsfeed.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomePageComponent },
   { path: 'posts', component: PostsComponent },
   { path: 'friends', component: FriendsPageComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'profiles', component: ProfilesComponent },
   { path: 'sitemap', component: SiteMapComponent },
-  { path: 'aboutus', component: AboutUsComponent }
+  { path: 'aboutus', component: AboutUsComponent },
+  { path: 'newsfeed', component: NewsfeedComponent }
 ]
 
 
@@ -39,7 +42,9 @@ const routes: Routes = [
     SiteMapComponent,
     AboutUsComponent,
     LoginComponent,
-    FriendsPageComponent
+    FriendsPageComponent,
+    NewsfeedComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,

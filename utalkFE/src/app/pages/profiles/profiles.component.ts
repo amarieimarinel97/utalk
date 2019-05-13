@@ -79,7 +79,6 @@ export class ProfilesComponent implements OnInit {
           (userResponse: User) => {
             var currUser = userResponse;
             currUser.password = this.currentPassword;
-            console.log(currUser);
             this.usersService.updateUser(currUser).subscribe(
               (user: User) => {
                 if (redirect) {

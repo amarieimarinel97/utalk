@@ -21,11 +21,17 @@ export class PostsComponent implements OnInit {
     private profilesService: ProfilesService,
     private route: ActivatedRoute,
     private router: Router) {
-      
+      if(!window.localStorage.getItem("profile-id")){
+        this.router.navigate(['/login']);
+      }
       profilesService.getProfiles().subscribe(
         (profilesResponse: Profile[]) => {
           var allProfiles = profilesResponse as Profile[];
-          this.currentProfile = allProfiles[0];
+          allProfiles.forEach((profile)=>{
+            if(profile.id==parseInt(window.localStorage.getItem("profile-id"))){
+              this.currentProfile = profile;
+            }
+          });
 
           postsService.getPosts().subscribe(
             (postsResponse: Post[]) => {
@@ -35,6 +41,11 @@ export class PostsComponent implements OnInit {
                   this.currentPosts.push(element);
                 }
               });
+              this.currentPosts.sort(
+                (postA, postB)=>{
+                  return (new Date(postA.posted_on).getTime()>new Date(postB.posted_on).getTime()?-1:1);
+                }
+              );
               console.log(this.currentPosts);
             }
             , (err) => {
@@ -47,16 +58,7 @@ export class PostsComponent implements OnInit {
           console.log(err);
         }
       );
-
-      
-
    }
-
-  //  public updatePosting() {
-  //   this.postsService.updatePosting(this.currentPosts).subscribe(() => {
-  //       this.router.navigate(['/home']);
-  //     });
-  //   }
 
   ngOnInit() {
   }

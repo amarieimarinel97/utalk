@@ -1,68 +1,53 @@
-.background-image {
-    background-image: url("../../../assets/background.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+app-home{
+    display:block;
 }
 
-#menu {
-    height: 100%;
-    width: 20%;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    padding-top: 20px;
-    user-select: none;
-}
 
-#menu .menu-link {
-    width: 100%;
+.wrapper {
+    border-radius: 5px;
+    background-color: #ddd;
+    margin: 20px 5% 15px 25%;
+    height: auto;
     text-align: center;
-    text-decoration: none;
-    font-size: 1rem;
+    box-sizing: border-box;
+    padding: 20px;
+    overflow:visible;   
+}
+
+.post-wrapper{
+    width:90%;
+    margin-left:5%;
+    margin-right:5%;
+    margin-bottom: 4rem;
+}
+
+.post-content{
+    margin-top: 1rem;
+    margin-bottom: -2.5rem;
+    color: #333;
     font-family: 'Roboto';
-    color: #aaa;
-    padding-top: 10px;
-    display: block;
+    font-size: 1.2rem;
     font-weight: 200;
+    display:block;
+}
+
+.content{
+    width:90%;
+    margin-left:3.5%;
+    margin-right:3.5%;
+    margin-top:1.5rem;
+    margin-bottom: 1.5rem;
+    display:block;
+    background-image: linear-gradient(to right, #aaa, #ccc);
+    overflow:visible;  
+    padding: 1rem; 
+}
+
+.post-date{
+    float:right;
+    color:#555;
     font-size: 0.8rem;
-}
-
-#profile-name {
-    color: #4f4f4f !important;
-    padding: 0 !important;
-    font-size: 1.25rem !important;
-    margin-bottom:0;
-}
-
-#menu p {
-    padding-top: 20px;
-    width: 100%;
-    text-align: center;
-    font-size: 1rem;
+    text-align:right;
     font-family: 'Roboto';
-    color: #b0b0b0;
-}
-
-#menu .menu-link:hover {
-    color: rgb(74, 138, 223);
-}
-
-#profile-pic {
-    border-radius: 50%;
-    width: 8rem;
-    height: 8rem;
-    padding: 5px calc(50% - 4rem);
-    object-fit: cover;
-    filter: drop-shadow(0 0 0.75rem #ffffff);
-}
-
-#occupation{
-    margin-top:0;
-    padding-top:0 !important;
-    font-size:0.7rem !important;
+    margin-top:2.5rem;
 }
