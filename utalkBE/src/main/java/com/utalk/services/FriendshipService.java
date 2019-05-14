@@ -39,6 +39,10 @@ public class FriendshipService {
         System.out.println("Called FriendshipService create");
 
         try (Connection connection = DatabaseConnection.getConnection()) {
+            friendshipRepository.create(connection, friendship);
+            int aux=friendship.getUser_id1();
+            friendship.setUser_id1(friendship.getUser_id2());
+            friendship.setUser_id2(aux);
             return friendshipRepository.create(connection, friendship);
         } catch (SQLException exceptionSQL) {
             System.out.println("Database connection could not be established: " + exceptionSQL.getMessage());

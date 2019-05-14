@@ -1,5 +1,5 @@
 
-<div class="wrapper" id="cover-photo">
+<div class="login-wrapper" id="cover-photo">
   <label id="profile-container" for="image-input">
     <img src="../../../assets/loginlogo.png" id="profile-pic">
   </label>
@@ -7,7 +7,7 @@
 </div>
 
 <form >
-  <div class="wrapper" id="first-wrapper">
+  <div class="login-wrapper" id="first-wrapper">
     <label for="user">Username</label>
     <input id="username" type="text" name="username" [(ngModel)]="user.username" required (ngModelChange)="onChange()" (keypress)="onEnter($event)">
 

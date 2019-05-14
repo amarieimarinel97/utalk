@@ -78,7 +78,7 @@ app-posts{
     margin-top:1.5rem;
     margin-bottom: 1.5rem;
     display:block;
-    background-image: linear-gradient(to right, #aaa, #ccc);
+    background-image: linear-gradient(to right, #dfdfdf, rgba(240,240,240, 0.3));
     overflow:visible;  
     padding: 1rem; 
 }
@@ -160,7 +160,7 @@ app-home{
     display:block;
 
 
-    background-image: linear-gradient(to right, #aaa, #ddd);
+    background-image: linear-gradient(to left, #dfdfdf, rgba(240,240,240, 0.3));
     padding: 5px;
     overflow:visible;   
 }

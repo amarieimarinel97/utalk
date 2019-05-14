@@ -6,6 +6,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppComponent } from 'src/app/app.component';
 import { Friends } from 'src/app/models/friend'
 import { FriendService } from 'src/app/services/friendservice/friend.service';
+import { UsersService } from 'src/app/services/usersservice/users.service';
+import { User } from 'src/app/models/user';
 
 
 @Component({
@@ -23,6 +25,7 @@ export class FriendsComponent implements OnInit {
   allProfiles: Profile[] = [];
   selectedFile: File = null;
   currentFriendsIds: number[] = [];
+  friendSearched: string = "";
 
 
 
@@ -30,7 +33,8 @@ export class FriendsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
-    private friendService: FriendService) {
+    private friendService: FriendService,
+    private usersService: UsersService) {
     if (window.localStorage.getItem("profile-id")) {
       this.photoUrl = AppComponent.imagesPath;
       profilesService.getProfileById(parseInt(window.localStorage.getItem("profile-id"))).subscribe(
@@ -74,6 +78,46 @@ export class FriendsComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+
+
+  search() {
+    console.log("new post now");
+    document.getElementById("search-button").setAttribute("style", "display:none;");
+    document.getElementById("first-content").setAttribute("style", "display:block;");
+  }
+  addFriend() {
+    console.log("searching for friend: " + this.friendSearched);
+    var friendFound: User = null;
+    this.usersService.getUsers().subscribe(
+      (usersResponse: User[]) => {
+        usersResponse.forEach(
+          (userIterated) => {
+            if (userIterated.username == this.friendSearched) {
+              friendFound = userIterated;
+            }
+          }
+        );
+        if (friendFound && !this.currentFriendsIds.includes(friendFound.profile_id)) {
+          var friendship: Friends = new Friends();
+          friendship.user_id1 = parseInt(window.localStorage.getItem("profile-id"));
+          friendship.user_id2 = friendFound.profile_id;
+          this.friendService.createFriendship(friendship).subscribe(
+            (friend: Friends) => {
+              this.router.navigate(['/home']);
+            }
+          );
+        }
+      }
+    );
+  }
+
+
+  onEnter(event: KeyboardEvent) {
+    if (event.key == "Enter") {
+      this.addFriend();
+    }
   }
 
 

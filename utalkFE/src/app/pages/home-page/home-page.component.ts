@@ -88,7 +88,6 @@ export class HomePageComponent implements OnInit {
               }
             );
           });
-          console.log(this.currentFriends);
         },
         (err) => {
           console.log(err);

@@ -1,8 +1,8 @@
-  <div class="wrapper" id="cover-photo">
+  <div class="profile-wrapper" id="cover-photo">
   <div id="home-link" [routerLink]="'/home'">Go back home</div>
 
   <label id="profile-container" for="image-input">
-    <img src="../../../assets/profile.jpg" id="profile-pic">
+    <img  id="profile-pic">
     <div id="upload-text">
       <div class="text">Change photo</div>
     </div>
@@ -12,7 +12,7 @@
 </div>
 
 <form>
-  <div class="wrapper" id="first-wrapper">
+  <div class="profile-wrapper" id="first-wrapper">
     <label for="user">Name</label>
     <input *ngIf="profile" id="name" type="text" [(ngModel)]="profile.name" [value]="profile.name"
        name="user">
@@ -21,7 +21,7 @@
     <input id="password" type="password" placeholder="Change password" [(ngModel)]="currentPassword" name="pass">
   </div>
 
-  <div class="wrapper" id="last-wrapper">
+  <div class="profile-wrapper" id="last-wrapper">
     <label for="user">Occupation</label>
     <input *ngIf="profile" id="occupation" [(ngModel)]="profile.occupation" type="text"
  
