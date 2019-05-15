@@ -85,7 +85,7 @@ input[type=text], input[type=password], input[type=date] {
 }
 
 #register-link {
-    width:10%;
+    width: 10%;
     margin-left: 45%;
     margin-right: 45%;
     text-align: center;
@@ -102,4 +102,33 @@ input[type=text], input[type=password], input[type=date] {
 
 #register-link:hover {
     color: rgb(74, 138, 223);
+}
+
+.not-shaking {
+    animation: none;
+    transform: initial;
+    perspective: 0px;
+    backface-visibility: initial;
+}
+
+.shaking {
+    animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+@keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+    20%, 80% {
+        transform: translate3d(2px, 0, 0);
+    }
+    30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+    40%, 60% {
+        transform: translate3d(4px, 0, 0);
+    }
 }

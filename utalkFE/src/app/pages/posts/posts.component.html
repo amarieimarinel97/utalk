@@ -12,6 +12,7 @@
       <div class="post-content">{{post.content}}
       </div>
       <div class="post-date">Posted on: {{post.posted_on}}</div>
+      <div class="delete-post" (click)="deletePost(post.id)">Delete</div>
     </div>
   </div>
 </div>

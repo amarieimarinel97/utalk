@@ -1,12 +1,11 @@
-app-home{
-    display:block;
+app-home {
+    display: block;
 }
 
-
-#friends-content{
-    width:100%;
-    border:none;
-    height:100%;
+#friends-content {
+    width: 100%;
+    border: none;
+    height: 100%;
 }
 
 .wrapper {
@@ -16,8 +15,7 @@ app-home{
     text-align: center;
     box-sizing: border-box;
     padding: 20px;
-    overflow:visible;  
-    
+    overflow: visible;
     background-image: url("../../../assets/graybg.jpg");
     background-position: center;
     background-repeat: no-repeat;
@@ -25,51 +23,48 @@ app-home{
     background-attachment: fixed;
 }
 
-.friend-wrapper{
-    width:90%;
-    margin-left:5%;
-    margin-right:5%;
+.friend-wrapper {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
     margin-bottom: 4rem;
     background-color: #fff;
 }
 
-.friend-info{
-    float:left;
-    margin-top:1rem;
+.friend-info {
+    float: left;
+    margin-top: 1rem;
     color: #333;
     font-family: 'Roboto';
     font-size: 1.2rem;
     font-weight: 200;
-    margin-left:2rem;
+    margin-left: 2rem;
 }
 
-.friend-photo{
+.friend-photo {
     border-radius: 50%;
     width: 4rem;
     height: 4rem;
     object-fit: cover;
-    float:left;
+    float: left;
 }
 
-.friend-content{
-    width:90%;
-    margin-left:5%;
-    margin-right:5%;
+.friend-content {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
     margin-bottom: 1rem;
-    display:block;
-
-
-    background-image: linear-gradient(to right, #dfdfdf, rgba(240,240,240, 0.0));
+    display: block;
+    background-image: linear-gradient(to right, #dfdfdf, rgba(240, 240, 240, 0.0));
     padding: 5px;
-    overflow:visible;   
+    overflow: visible;
 }
 
-.friend-occupation{
-    color:#555;
+.friend-occupation {
+    color: #555;
     font-size: 0.8rem;
-    text-align:left;
-    margin-left:2rem;
-
+    text-align: left;
+    margin-left: 2rem;
 }
 
 .button {
@@ -84,16 +79,16 @@ app-home{
     border-radius: 5px;
     text-align: center;
     user-select: none;
-    cursor:pointer;
-    font-family:'Roboto';
+    cursor: pointer;
+    font-family: 'Roboto';
 }
 
-.button:hover{
-    background-color: rgba(180,180,180, 0.7);
+.button:hover {
+    background-color: rgba(180, 180, 180, 0.7);
 }
 
-#first-content{
-    display:none;
+#first-content {
+    display: none;
 }
 
 #text-input {
@@ -103,8 +98,7 @@ app-home{
     border-radius: 4px;
     background-color: #f8f8f8;
     resize: none;
-  }
-
+}
 
 .addFriend-link {
     width: 100%;
@@ -117,10 +111,39 @@ app-home{
     display: block;
     font-weight: 200;
     font-size: 0.8rem;
-    cursor:pointer;
-    margin-bottom:1rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
 }
 
 .addFriend-link:hover {
     color: rgb(74, 138, 223);
+}
+
+.not-shaking {
+    animation: none;
+    transform: initial;
+    perspective: 0px;
+    backface-visibility: initial;
+}
+
+.shaking {
+    animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+@keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+    20%, 80% {
+        transform: translate3d(2px, 0, 0);
+    }
+    30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+    40%, 60% {
+        transform: translate3d(4px, 0, 0);
+    }
 }

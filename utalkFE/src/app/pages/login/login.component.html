@@ -9,13 +9,12 @@
 <form >
   <div class="login-wrapper" id="first-wrapper">
     <label for="user">Username</label>
-    <input id="username" type="text" name="username" [(ngModel)]="user.username" required (ngModelChange)="onChange()" (keypress)="onEnter($event)">
+    <input id="username" type="text" name="username" [(ngModel)]="user.username" required (ngModelChange)="onChange()" (keypress)="onEnter($event)" [ngClass]="{'shaking':loginFailed()}">
 
     <label for="password">Password</label>
     <input id="password" type="password" [(ngModel)]="user.password" name="password" (ngModelChange)="onChange()"
-      required (keypress)="onEnter($event)">
+      required (keypress)="onEnter($event)" [ngClass]="{'shaking':loginFailed(), 'not-shaking':!loginFailed()}">
     <div id="register-link" (click)="wantToRegister()">Register?</div>
-
   </div>
 
   <div id="login-button" class="button unselectable unclickable" [ngClass]="{'valid-button': isValid() , 'invalid-button':!isValid()}" (click)="login()">

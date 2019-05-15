@@ -3,7 +3,7 @@
         SEARCH
     </div>
     <div class="content" id="first-content">
-        <input id="text-input" type="text" [(ngModel)]="friendSearched" (keypress)="onEnter($event)">
+        <input id="text-input" type="text" [(ngModel)]="friendSearched" [ngClass]="{'shaking':searchFailed(), 'not-shaking':!searchFailed()}" (keypress)="onEnter($event)">
         <a class="addFriend-link" (click)="addFriend()">Add friend</a>
     </div>
     <div class="friend-content" *ngFor="let friend of currentFriends">

@@ -26,7 +26,7 @@ export class FriendsComponent implements OnInit {
   selectedFile: File = null;
   currentFriendsIds: number[] = [];
   friendSearched: string = "";
-
+  isFriendValid:boolean=true;
 
 
   constructor(private profilesService: ProfilesService,
@@ -83,12 +83,11 @@ export class FriendsComponent implements OnInit {
 
 
   search() {
-    console.log("new post now");
     document.getElementById("search-button").setAttribute("style", "display:none;");
     document.getElementById("first-content").setAttribute("style", "display:block;");
   }
+
   addFriend() {
-    console.log("searching for friend: " + this.friendSearched);
     var friendFound: User = null;
     this.usersService.getUsers().subscribe(
       (usersResponse: User[]) => {
@@ -108,11 +107,20 @@ export class FriendsComponent implements OnInit {
               this.router.navigate(['/home']);
             }
           );
+        }else{
+          this.friendSearched="";
+          this.isFriendValid=false;
+          setTimeout(function(){
+            this.isFriendValid=true;
+          }, 1000);
         }
       }
     );
   }
 
+  searchFailed():boolean{
+    return !(this.isFriendValid);
+  }
 
   onEnter(event: KeyboardEvent) {
     if (event.key == "Enter") {

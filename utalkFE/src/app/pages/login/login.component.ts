@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     this.user.username = "";
     this.user.password = "";
   }
-
+  isLoginCorrect: boolean = true;
   isGoingToRegister: boolean = false;
   isFormValid: boolean = false;
   onChange() {
@@ -40,6 +40,10 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  loginFailed():boolean{
+    return !(this.isLoginCorrect);
+  }
+
   login() {
     if (!this.isGoingToRegister) {
       this.usersService.getUsers().subscribe(
@@ -55,7 +59,12 @@ export class LoginComponent implements OnInit {
             window.localStorage.setItem("profile-id", currentUser.profile_id + "");
             this.router.navigate(['/home']);
           } else {
-            this.router.navigate(['/login']);
+            this.isLoginCorrect=false;
+            this.user.username="";
+            this.user.password="";
+            setTimeout(function(){
+              this.isLoginCorrect=true;
+            }, 1000);
           }
         }
 

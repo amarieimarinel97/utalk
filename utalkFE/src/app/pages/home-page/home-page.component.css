@@ -79,7 +79,7 @@ app-posts{
     margin-bottom: 1.5rem;
     display:block;
     background-image: linear-gradient(to right, #dfdfdf, rgba(240,240,240, 0.3));
-    overflow:visible;  
+    overflow:hidden;  
     padding: 1rem; 
 }
 
@@ -90,11 +90,6 @@ app-posts{
     text-align:right;
     font-family: 'Roboto';
     margin-top:2.5rem;
-}
-
-
-app-home{
-    display:block;
 }
 
 
@@ -123,7 +118,7 @@ app-home{
     text-align: center;
     box-sizing: border-box;
     padding: 20px;
-    overflow:visible;   
+    overflow:hidden;   
 }
 
 .friend-wrapper{
@@ -170,5 +165,33 @@ app-home{
     font-size: 0.8rem;
     text-align:left;
     margin-left:2rem;
-
 }
+
+
+  
+@media only screen and (max-width: 1000px) {
+    
+
+
+.friend-main-wrapper {
+    margin: 20px 0 15px 0;
+    width:275%;
+}
+
+
+.post-main-wrapper {
+    margin: 20px 0 15px 0;
+    width:275%;
+    margin-left:30%; 
+}
+
+#friends{
+    float: none;
+    margin-left:31%;
+}
+
+#posts{
+    float:none;
+    margin-left:19%;
+}
+  }

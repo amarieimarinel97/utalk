@@ -57,6 +57,20 @@ app-home{
     margin-top:2.5rem;
 }
 
+.delete-post{
+    float:right;
+    color:#555;
+    font-size: 0.8rem;
+    text-align:right;
+    font-family: 'Roboto';
+    margin-top:2.5rem;
+    float:left;
+    cursor: pointer;
+}
+
+.delete-post:hover{
+    color: rgb(74, 138, 223);
+}
 
 
 .button {

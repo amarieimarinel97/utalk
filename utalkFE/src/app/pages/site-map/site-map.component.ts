@@ -22,5 +22,10 @@ export class SiteMapComponent implements OnInit {
     document.getElementById("site-map-content").setAttribute("src", this.jspUrl+"sitemap.jsp");
   }
 
+  showMoreInfo(){
+    document.getElementById("more-info").style.display="none";
+    document.getElementById("my-info").setAttribute("src", this.jspUrl+"SiteInfo");
+    document.getElementById("my-info").style.display="initial";
+  }
 
 }

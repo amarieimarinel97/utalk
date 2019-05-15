@@ -47,7 +47,6 @@ export class PostsComponent implements OnInit {
                 return (new Date(postA.posted_on).getTime() > new Date(postB.posted_on).getTime() ? -1 : 1);
               }
             );
-            console.log(this.currentPosts);
           }
           , (err) => {
             console.log(err);
@@ -75,7 +74,6 @@ export class PostsComponent implements OnInit {
     newPost.content = this.currentInputText;
     newPost.posted_on = new Date();
     newPost.id=-1;
-    console.log(newPost);
     this.postsService.createPosting(newPost).subscribe(
       (postResponse: Post) => {
         this.router.navigate(['/home']);
@@ -83,6 +81,14 @@ export class PostsComponent implements OnInit {
       (err)=>{
         console.log(err);
       });
+  }
+
+  deletePost(id:number){
+    this.postsService.deletePosting(id).subscribe(
+      ()=>{
+        location.reload();
+      }
+    )
   }
 
 }

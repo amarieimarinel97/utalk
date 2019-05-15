@@ -28,7 +28,7 @@ export class PostsService {
 		return this.http.put(AppComponent.serverUrl + "posts/" + profile_id, posting);
 	}
 	
-	public deletePosting(profile_id: number): Observable<Object> {
-		return this.http.delete(AppComponent.serverUrl + "posts/" + profile_id);
+	public deletePosting(id: number): Observable<Object> {
+		return this.http.delete(AppComponent.serverUrl + "posts/" + id);
 	}
 }
