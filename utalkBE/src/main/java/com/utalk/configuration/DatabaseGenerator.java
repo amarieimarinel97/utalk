@@ -88,10 +88,20 @@ public class DatabaseGenerator {
 
     public static User generateUser(Integer profile_id) {
         User user = new User();
-        user.setPassword(faker.lorem().word());
-        String secondWord = faker.lorem().word().toLowerCase();
-        secondWord = secondWord.substring(0, 1).toUpperCase() + secondWord.substring(1);
-        user.setUsername(faker.lorem().word().toLowerCase() + secondWord);
+        String username="";
+        String password="";
+        while(username.length()<4){
+            String firstWord=faker.lorem().word().toLowerCase();
+            String secondWord = faker.lorem().word().toLowerCase();
+            secondWord = secondWord.substring(0, 1).toUpperCase() + secondWord.substring(1);
+            username=firstWord+secondWord;
+        }
+        user.setUsername(username);
+
+        while(password.length()<4) {
+            password = faker.lorem().word().toLowerCase();
+        }
+        user.setPassword(password);
         user.setProfile_id(profile_id);
         return user;
     }
@@ -150,7 +160,6 @@ public class DatabaseGenerator {
     }
 
     static {
-//        generateData(50, 200, 200);
-
+        generateData(200, 500, 500);
     }
 }
