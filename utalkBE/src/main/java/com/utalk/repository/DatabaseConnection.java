@@ -2,7 +2,7 @@ package com.utalk.repository;
 
 import com.utalk.configuration.ApplicationConfiguration;
 
-import javafx.util.Pair;
+import com.utalk.model.Pair;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

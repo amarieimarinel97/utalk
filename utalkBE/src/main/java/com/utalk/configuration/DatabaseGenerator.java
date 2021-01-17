@@ -1,16 +1,12 @@
 package com.utalk.configuration;
 
 import com.github.javafaker.Faker;
-import com.utalk.model.Friendship;
-import com.utalk.model.Post;
-import com.utalk.model.Profile;
-import com.utalk.model.User;
+import com.utalk.model.*;
 import com.utalk.repository.DatabaseConnection;
 import com.utalk.repository.friendship.FriendshipRepository;
 import com.utalk.repository.posts.PostsRepository;
 import com.utalk.repository.profile.ProfileRepository;
 import com.utalk.repository.user.UserRepository;
-import javafx.util.Pair;
 import org.springframework.context.annotation.Configuration;
 
 import java.sql.Connection;
