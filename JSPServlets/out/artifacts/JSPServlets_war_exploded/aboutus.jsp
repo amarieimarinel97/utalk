@@ -15,7 +15,7 @@
 <% Map<String,String> contributors = new HashMap<>();
 contributors.put("Marinel A.", "github.com/amarieimarinel97 / marinel.amariei97@yahoo.com");
 contributors.put("Oana B.", "github.com/oanablejusca / oana.blejusca97@gmail.com");
-%>
+
 
 <%out.println("<p id=\"aboutus-title\">uTalk About Us</p>"); %>
 <%out.println("<p>uTalk is a sideproject we were forced to do for our IT course trough which we <br>try to understand deeper how these big social media platforms work.</p>"); %>
